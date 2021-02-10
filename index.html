@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <style>
+            *{
+                background-color: #f6f4ea;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                color: #494747;
+                box-sizing: border-box;
+            }
+            
+            .container {
+                max-width: 1170px;
+                width: 100%;
+                padding: 15px 0;
+                margin: 0 auto;
+            }
+
+            #Box-Input, #Box-Output{
+                position: absolute;
+                margin: auto;
+                top: 20%;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+
+            #Box-Output{
+                top: 10%;
+            }
+
+            #Box-Input input{
+                padding: 10px 10px;
+                width: 600px;
+                border: none;
+                background-color: #f6f4ea;
+                color: #494747;
+                text-align: center;
+                font-size: 30px;
+                border-bottom: 3px solid #494747;
+                margin-bottom: 20px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 300;
+            }
+
+            #Box-Input input:focus, button:focus{
+                outline: none;
+            }
+
+            #Box-Input button, #Box-Output button{
+                padding: 5px 20px;
+                border: none;
+                border-radius: 5px;
+                background-color: #fff387;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 25px;
+                margin-top: 15px;
+                color: #494747;
+            }
+
+            #Box-Input p{
+                color: red;
+                margin-bottom: 30px;
+            }
+
+            #Box-Output #Head{
+                font-size: 35px;
+            }
+
+            #Box-Output #Message-Text{
+                padding: 0 10%;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 300;
+                font-size: 25px;
+            }
+
+            #Logo{
+                width:27%;
+            }
+            
+            @media all and (max-width: 670px){
+                #Box-Input input{
+                    width: 200px;
+                }
+                
+                #Logo{
+                    width: 50%;
+                }
+
+                #Box-Output #Head{
+                    font-size: 25px;
+                }
+
+                #Box-Output #Message-Text{
+                    padding: 0 5%;
+                    font-size: 20px;
+                }
+
+                #Box-Output{
+                    top: 5%;
+                }
+
+                #Box-Output button{
+                    margin-bottom: 30px;
+                }   
+            }
+
+            @media all and (max-width: 376px){
+                #Box-Output #Message-Text{
+                    font-size: 18px;
+                }
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div id="Box-Input">
+                <img src="6.png" id="Logo">
+                <h1>welcome! <br> please enter your name.</h1>
+                <div class="Name">
+                    <input type="text" id="Name" name="Name">
+                    <p id="Error-Message">Please Enter Your Name</p>
+                </div>
+                <button onclick="letsGo()" id="Go">SUBMIT</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div id="Box-Output">
+                <div>
+                    <p id="Head"></p>
+                    <div id="Message">
+                        <p id="Message-Text"></p>
+                    </div>
+                </div>
+                <button onclick="GoBack()">GO BACK</button>
+            </div>
+        </div>
+
+        <script>
+            window.onload = function(){
+                document.getElementById("Error-Message").style.display = "none";
+                document.getElementById("Box-Output").style.display = "none";
+		$("#Box-Input").fadeIn("slow");
+            }
+
+            function letsGo() {
+                if(document.getElementById("Name").value === ""){
+                    document.getElementById("Error-Message").style.display = "block";    
+                }else{
+                    $("#Box-Input").fadeOut("slow");
+                    setTimeout(function(){
+                        $("#Box-Output").fadeIn("slow");
+                    },2000);
+                    
+                    var x = "lightly, " + document.getElementById("Name").value + ", lightly.";
+                    document.getElementById("Head").innerHTML = x;
+
+                    var word = "hello, " + document.getElementById("Name").value + "!<br> <br>"
+                    + "thank you so much for your kind purchase. you just made our day lighter! we sincerely hope you enjoy our product as much as we have enjoyed making it. if you have any questions, thoughts, feedbacks, or even pictures, please don't hesitate to contact us. we'd love to hear more from you.<br> <br>"
+                    + "p.s. don't forget to pop our goodies in the oven or microwave for a few minutes before consuming to make them extra warm and crunchy! <br> <br>"
+                    + "once again, thank you, " + document.getElementById("Name").value + "! have a light day ahead!";
+                    document.getElementById("Message-Text").innerHTML = word;
+                }
+            }
+
+            function GoBack(){
+                var x = document.getElementById("Error-Message");
+                $("#Box-Output").fadeOut("slow");
+                setTimeout(function(){
+                    $("#Box-Input").fadeIn("slow");
+                },2000);
+
+                if(x.style.display !== "none"){
+                    x.style.display = "none";
+                }
+
+                document.getElementById("Name").value = "";
+            }
+        </script>
+    </body>
+</html>
